@@ -20,9 +20,9 @@ WORKDIR /workspace/zeppelin
 # Allow npm and bower to run with root privileges
 RUN echo "unsafe-perm=true" > ~/.npmrc && \
     echo '{ "allow_root": true }' > ~/.bowerrc && \
-    mvn -B package -DskipTests -Pbuild-distr -Pspark-3.0 -Pinclude-hadoop -Phadoop3 -Pspark-scala-2.12 -Pweb-angular && \
+#    mvn -B package -DskipTests -Pbuild-distr -Pspark-3.0 -Pinclude-hadoop -Phadoop3 -Pspark-scala-2.12 -Pweb-angular && \
     # Example with doesn't compile all interpreters
-    # mvn -B package -DskipTests -Pbuild-distr -Pspark-3.0 -Pinclude-hadoop -Phadoop3 -Pspark-scala-2.12 -Pweb-angular -pl '!groovy,!submarine,!livy,!hbase,!pig,!file,!flink,!ignite,!kylin,!lens' && \
+    mvn -B package -DskipTests -Pbuild-distr -Pspark-2.3 -Phadoop2 -Dhadoop.version=2.7.3 -Pspark-scala-2.11 -Pscala-2.11 -Pweb-angular -pl '!groovy,!submarine,!mongodb,!angular,!shell,!hbase,!pig,!jdbc,!file,!flink,!ignite,!influxdb,!kylin,!lens,!cassandra,!elasticsearch,!bigquery,!alluxio,!scio,!neo4j,!sap,!scalding,!java,!beam,!hazelcastjet,!geode,!ksql,!sparql,!zeppelin-client-examples' && \
     mv /workspace/zeppelin/zeppelin-distribution/target/zeppelin-*/zeppelin-* /opt/zeppelin/ && \
     # Removing stuff saves time, because docker creates a temporary layer
     rm -rf ~/.m2 && \
