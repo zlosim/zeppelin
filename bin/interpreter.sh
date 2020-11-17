@@ -168,6 +168,7 @@ if [[ "${INTERPRETER_ID}" == "spark" ]]; then
     SPARK_APP_JAR="$(ls "${ZEPPELIN_HOME}"/interpreter/spark/spark-interpreter*.jar)"
     # This will evantually passes SPARK_APP_JAR to classpath of SparkIMain
     ZEPPELIN_INTP_CLASSPATH+=":${SPARK_APP_JAR}"
+    ZEPPELIN_INTP_CLASSPATH+=":${SPARK_HOME}/jars/*"
 
     py4j=("${SPARK_HOME}"/python/lib/py4j-*-src.zip)
     # pick the first match py4j zip - there should only be one
